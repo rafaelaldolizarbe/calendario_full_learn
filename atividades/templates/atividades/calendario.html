@@ -1,0 +1,44 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+<h1>Calendário implementado Fullcallendar</h1>
+<p>Este projeto visa usar o calendário para realizar cadastro de eventos importantes relativos às atividades de aprendizado que serão realizadas durante a jornada de aprendizado Python.</p>
+{% load static %}</p>
+
+<p> Esta página inicial mostra itens previamente cadastrados, no entanto podemos cadastrar mais ítems clicando no link a seguir <a href="{% url 'novoevento' %}">Criar novo Evento!</a></p>
+<div id="calendar"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let calendarEl = document.getElementById('calendar');
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'pt-br',
+            events: [
+                {% for atividade in atividades %}
+                {
+                    id: "{{ atividade.id }}",
+                    title: "{{ atividade.titulo }}",
+                    start: "{{ atividade.data_inicio|date:'Y-m-d\\TH:i:s' }}",
+                    end: "{{ atividade.data_fim|date:'Y-m-d\\TH:i:s' }}",
+                    description: "{{ atividade.descricao|default_if_none:'' }}",
+                    color: "{{ atividade.cor }}"
+                },
+                {% endfor %}
+            ],
+        eventDidMount: function (info) {
+            // Adiciona o tooltip padrão do HTML
+            if (info.event.extendedProps.description) {
+                info.el.setAttribute('title', info.event.extendedProps.description);
+            }
+    },
+        eventClick: function (info) {
+            window.location.href = "/atividades/editarevento/" + info.event.id + "/";
+        }
+        });
+        calendar.render();
+    });
+</script>
+
+
+{% endblock %}

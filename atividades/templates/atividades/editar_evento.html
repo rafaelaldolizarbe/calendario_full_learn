@@ -1,0 +1,72 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+<div id="container_novoevento">
+    <div id="esq">
+        
+        <h2>Editar Evento</h2>
+        <form method="post" class="form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_titulo">Título</label>
+                <input type="text" name="titulo" id="id_titulo" class="form-control" required value="{{ evento.titulo }}">
+            </div>
+            <div class="form-group">
+                <label for="id_descricao">Descrição</label>
+                <textarea name="descricao" id="id_descricao" class="form-control">{{ evento.descricao }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="id_data_inicio">Data e hora de início</label>
+                <input type="datetime-local" name="data_inicio" id="id_data_inicio" class="form-control" required value="{{ evento.data_inicio|date:'Y-m-d\\TH:i' }}">
+            </div>
+            <div class="form-group">
+                <label for="id_data_fim">Data e hora de fim</label>
+                <input type="datetime-local" name="data_fim" id="id_data_fim" class="form-control" required value="{{ evento.data_fim|date:'Y-m-d\\TH:i' }}">
+            </div>
+            <div class="form-group">
+                <label for="id_cor">Cor do evento</label>
+                <input type="color" name="cor" id="id_cor" class="form-control" value="{{ evento.cor|default:'#3788d8' }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            <a href="{% url 'novoevento' %}" class="btn btn-success mb-3">Novo Evento</a>
+        </form>
+    </div>
+
+    <div id="dir">
+        <h2>Calendário</h2>
+        <div id="calendar"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let calendarEl = document.getElementById('calendar');
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'pt-br',
+            events: [
+                {% for evento in eventos %}
+                {
+                    id: "{{ evento.id }}",
+                    title: "{{ evento.titulo|escapejs }}",
+                    start: "{{ evento.data_inicio|date:'Y-m-d\\TH:i:s' }}",
+                    end: "{{ evento.data_fim|date:'Y-m-d\\TH:i:s' }}",
+                    description: "{{ evento.descricao|default_if_none:''|escapejs }}",
+                    color: "{{ evento.cor }}"
+                },
+                {% endfor %}
+            ],
+            eventDidMount: function (info) {
+                if (info.event.extendedProps.description) {
+                    info.el.setAttribute('title', info.event.extendedProps.description);
+                }
+            },
+            eventClick: function (info) {
+                window.location.href = "/atividades/editarevento/" + info.event.id + "/";
+            }
+        });
+        calendar.render();
+    });
+</script>
+{% endblock %}
