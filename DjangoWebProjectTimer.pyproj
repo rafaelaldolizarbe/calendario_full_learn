@@ -6,6 +6,7 @@
     <RootNamespace>DjangoWebProjectTimer</RootNamespace>
     <InterpreterId>MSBuild|venv|$(MSBuildProjectFullPath)</InterpreterId>
     <TestFramework>Pytest</TestFramework>
+    <SuppressPackageInstallationPrompt>True</SuppressPackageInstallationPrompt>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -40,6 +41,8 @@
     <Compile Include="app\migrations\__init__.py" />
     <Compile Include="atividades\admin.py" />
     <Compile Include="atividades\apps.py" />
+    <Compile Include="atividades\forms\admin_form.py" />
+    <Compile Include="atividades\forms\__init__.py" />
     <Compile Include="atividades\migrations\__init__.py" />
     <Compile Include="atividades\models.py" />
     <Compile Include="atividades\entityes\atividade.py" />
@@ -68,6 +71,7 @@
     <Folder Include="atividades\" />
     <Folder Include="atividades\migrations\" />
     <Folder Include="atividades\entityes\" />
+    <Folder Include="atividades\forms\" />
     <Folder Include="atividades\templates\" />
     <Folder Include="atividades\templates\atividades\" />
     <Folder Include="atividades\views\" />
@@ -75,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="atividades\templates\atividades\calendario.html" />
+    <Content Include="atividades\templates\atividades\editar_evento.html" />
     <Content Include="atividades\templates\atividades\novo_evento.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
