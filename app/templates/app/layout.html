@@ -7,6 +7,7 @@
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'app/content/site.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/darkmode.css' %}" />
     <!-- FullCalendar -->
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js"></script>
     <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
@@ -31,6 +32,7 @@
                     <li><a href="{% url 'calendario' %}">Calendar</a></li>
                 </ul>
                 {% include 'app/loginpartial.html' %}
+                
             </div>
         </div>
     </div>
@@ -46,6 +48,7 @@
     <script src="{% static 'app/scripts/jquery-1.10.2.js' %}"></script>
     <script src="{% static 'app/scripts/bootstrap.js' %}"></script>
     <script src="{% static 'app/scripts/respond.js' %}"></script>
+    <script src="{% static 'app/scripts/darkmodebutton.js' %}"></script>
 {% block scripts %}{% endblock %}
 
 </body>

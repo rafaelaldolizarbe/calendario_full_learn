@@ -1,0 +1,51 @@
+
+body.dark-mode {
+    background-color: #181a1b !important;
+    color: #e8e6e3 !important;
+}
+
+body.dark-mode .navbar-inverse {
+    background-color: #23272b;
+    border-color: #222;
+}
+
+    body.dark-mode .navbar-inverse .navbar-brand,
+    body.dark-mode .navbar-inverse .navbar-nav > li > a {
+        color: #e8e6e3;
+    }
+
+body.dark-mode .container.body-content {
+    background-color: #23272b;
+    color: #e8e6e3;
+}
+
+body.dark-mode .form-control,
+body.dark-mode input,
+body.dark-mode textarea {
+    background-color: #23272b;
+    color: #e8e6e3;
+    border-color: #444;
+}
+
+body.dark-mode .btn-primary,
+body.dark-mode .btn-success,
+body.dark-mode .btn-danger,
+body.dark-mode .btn-secondary {
+    filter: brightness(0.85);
+}
+
+body.dark-mode #toggle-dark-mode {
+    background-color: #23272b;
+    color: #e8e6e3;
+    border-color: #444;
+}
+
+body.dark-mode .jumbotron {
+    background-color: #23272b;
+    color: #e8e6e3;
+}
+
+body.dark-mode #toggle-dark-mode:hover {
+    background-color: #181a1b;
+    color: #fff;
+}

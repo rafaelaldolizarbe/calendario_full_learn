@@ -48,3 +48,16 @@ def editar_evento_view(request,evento_id):
     eventos = Atividade.objects.filter(created_by=request.user)
     return render(request, 'atividades/editar_evento.html', {'evento': evento, 'eventos':eventos})
 
+@login_required
+def visualizar_evento_view(request, evento_id):
+    evento = get_object_or_404(Atividade, id=evento_id, created_by=request.user)
+    eventos = Atividade.objects.filter(created_by=request.user)
+    return render(request, 'atividades/visualizar_evento.html', {'evento': evento, 'eventos':eventos})
+
+@login_required
+def deletar_evento_view(request, evento_id):
+    evento = get_object_or_404(Atividade, id=evento_id, created_by=request.user)
+    if request.method == 'POST':
+        evento.delete()
+        return redirect('calendario')  # Redireciona para o calendário após deletar
+    return render(request, 'atividades/deletar_evento_confirmacao.html', {'evento': evento})
